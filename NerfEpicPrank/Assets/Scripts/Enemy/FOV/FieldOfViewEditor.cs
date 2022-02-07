@@ -16,11 +16,18 @@ public class FieldOfViewEditor : Editor
         Vector3 viewAngleA = fieldOfView.DirFromAngle(-fieldOfView.viewAngle / 2, false);
         Vector3 viewAngleB = fieldOfView.DirFromAngle(fieldOfView.viewAngle / 2, false);
 
+        Handles.color = Color.red;
         Handles.DrawLine(fieldOfView.transform.position, fieldOfView.transform.position + viewAngleA * fieldOfView.viewRadius);
         Handles.DrawLine(fieldOfView.transform.position, fieldOfView.transform.position + viewAngleB * fieldOfView.viewRadius);
 
         Handles.color = Color.red;
+        Handles.DrawWireArc(fieldOfView.transform.position,
+           Vector3.up, viewAngleA, fieldOfView.viewAngle, fieldOfView.viewRadius);
+
         if (fieldOfView.targetIsDetected)
+        {
             Handles.DrawLine(fieldOfView.transform.position, fieldOfView.targetPosition);
+            Handles.DrawSphere(1, fieldOfView.targetPosition, Quaternion.identity, 1);
+        }
     }
 }
