@@ -17,10 +17,10 @@ TagManager:
   - 
   - Targets
   - Obstacles
-  - 
-  - 
-  - 
-  - 
+  - EnemyBullet
+  - PlayerBullet
+  - UsedBullet
+  - EnemyAndPlayer
   - 
   - 
   - 

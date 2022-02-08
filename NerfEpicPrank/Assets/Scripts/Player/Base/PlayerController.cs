@@ -13,24 +13,42 @@ public class PlayerController : MonoBehaviour
     private AttackState attackState;
     private RunState runState;
     private PatrolState patrolState;
+
+    public Vector3 hidePosition;
+    public Quaternion hideRotation;
+
+    public Vector3 attackPosition;
+    public Quaternion attackRotation;
+
+    public Transform exitTransform;
+    #endregion
+
+    #region COMPONENT PARAMETERS
+    [Header("Components")]
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public AudioSource audioSource;
     #endregion
 
     #region Wepaon PARAMETERS
     [Header("Silah")]
     public Weapon weapon;
-
-    [Header("Sahte Silah Değişkenleri")]
-    [Tooltip("Saniyede atılacak mermi sayısı")]
-    public float fireRate;
-    [HideInInspector] public float nextTimeToFire;
-    [Tooltip("Her atılacak merminin vereceği hasar")]
-    public float damage;
     #endregion
 
+    #region Other PARAMETERS
     [Header("Hareket Hızı")]
-    public float speed;
+    public float moveSpeed;
+
+    public GameObject playerModel;
+
+    public AudioClip attackClip;
+    public AudioClip hideClip;
+    public AudioClip runClip;
+    #endregion
+
+    public List<Transform> patrolPoints;
 
     public static PlayerController instance;
+
 
     private void Awake()
     {
@@ -41,6 +59,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
+        audioSource = playerModel.GetComponent<AudioSource>();
+        animator = playerModel.GetComponent<Animator>();
         StateGenerator();
         Hide();
     }
@@ -170,23 +190,25 @@ public class PlayerController : MonoBehaviour
 
     private HideState NewHide()
     {
-        hideState = new HideState(HideCallback);
+        hideState = new HideState(HideCallback, hidePosition, hideRotation,
+            playerModel, audioSource, animator, hideClip);
         return hideState;
     }
 
     private AttackState NewAttack()
     {
-        attackState = new AttackState(AttackCallback, weapon);
+        attackState = new AttackState(AttackCallback, weapon, attackPosition,
+            attackRotation, playerModel, audioSource, animator, attackClip);
         return attackState;
     }
     private RunState NewRun()
     {
-        runState = new RunState(RunCallback);
+        runState = new RunState(RunCallback, moveSpeed, exitTransform, audioSource, animator, attackClip);
         return runState;
     }
     private PatrolState NewPatrol()
     {
-        patrolState = new PatrolState(PatrolCallback);
+        patrolState = new PatrolState(PatrolCallback, moveSpeed, audioSource, animator, attackClip);
         return patrolState;
     }
     #endregion

@@ -12,9 +12,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform muzzle;
 
+
+    [SerializeField] private AudioSource audioSource;
+
     private void Awake()
     {
         nextTimeToFire = fireRate;
+        audioSource = GetComponent<AudioSource>();
     }
     public void Fire()
     {
@@ -33,6 +37,11 @@ public class Weapon : MonoBehaviour
         currentBullet.GetComponent<Rigidbody>().AddForce(bulletForce *
             transform.forward * Time.deltaTime * 100);
 
-        Destroy(currentBullet, 20);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
+
+        Destroy(currentBullet, 7);
     }
 }

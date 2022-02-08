@@ -20,8 +20,8 @@ public class EnemyAI : MonoBehaviour
     #region COMPONENT PARAMETERS
     [Header("Components")]
     [HideInInspector] public FieldOfView fieldOfView;
-    //[HideInInspector] public Animator animator;
-    //[HideInInspector] public AudioSource audioSource;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public AudioSource audioSource;
 
     [Header("Düşman Obje")]
     [HideInInspector] public Transform target;
@@ -29,28 +29,25 @@ public class EnemyAI : MonoBehaviour
 
     #region OTHER PARAMETERS
     [Header("Hareket Hızı")]
-    public float speed;
+    public float moveSpeed;
+
+    [Header("Dönme Hızı")]
+    public float rotateSpeed;
 
     [Header("Alarm Değişkenleri")]
     [Tooltip("Chase' e geçerken alarm süresi")]
     public float chaseAlarmTime;
     [Tooltip("Suspicion' a geçerken alarm süresi")]
     public float suspicionAlarmTime;
-
-    [Tooltip("Alarm süresi")]
-    public float alarmTimer;
-
-    [Header("Sahte Silah Değişkenleri")]
-    [Tooltip("Saniyede atılacak mermi sayısı")]
-    public float fireRate;
-    [HideInInspector] public float nextTimeToFire;
-    [Tooltip("Her atılacak merminin vereceği hasar")]
-    public float damage;
-
-    public Image chaseAlarmImage;
-    public Image suspicionAlarmImage;
+    [Tooltip("Search' a geçerken alarm süresi")]
+    public float searchAlarmTime;
 
     public GameObject alarmDisplay;
+
+    public AudioClip idleClip;
+    public AudioClip runClip;
+    public AudioClip searchClip;
+    public AudioClip suspicionClip;
     #endregion
 
 
@@ -66,8 +63,8 @@ public class EnemyAI : MonoBehaviour
 
     private void Start()
     {
-        //audioSource = GetComponent<AudioSource>();
-        //animator = GetComponentInChildren<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
         fieldOfView = GetComponent<FieldOfView>();
         target = fieldOfView.target.transform;
         StateGenerator();
@@ -244,7 +241,7 @@ public class EnemyAI : MonoBehaviour
 
     private ChaseState NewChase()
     {
-        chaseState = new ChaseState(ChaseCallback);
+        chaseState = new ChaseState(ChaseCallback, audioSource, animator, searchClip, moveSpeed);
         return chaseState;
     }
     private ShootState NewShoot()
@@ -254,17 +251,20 @@ public class EnemyAI : MonoBehaviour
     }
     private IdleState NewIdle()
     {
-        idleState = new IdleState(IdleCallback);
+        idleState = new IdleState(IdleCallback, audioSource, animator,
+            idleClip, alarmDisplay);
         return idleState;
     }
     private SuspicionState NewSuspicion()
     {
-        suspicionState = new SuspicionState(SuspicionCallback);
+        suspicionState = new SuspicionState(SuspicionCallback, audioSource, animator,
+            searchClip, rotateSpeed, alarmDisplay);
         return suspicionState;
     }
     private SearchState NewSearch()
     {
-        searchState = new SearchState(SearchCallback);
+        searchState = new SearchState(SearchCallback, audioSource, animator,
+            searchClip, rotateSpeed, alarmDisplay);
         return searchState;
     }
     #endregion

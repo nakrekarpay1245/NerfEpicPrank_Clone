@@ -27,7 +27,7 @@ public class FieldOfView : MonoBehaviour
     public bool targetInFieldOfView;
     public bool targetIsDetected;
 
-    public bool lastSeen;
+    //public bool lastSeen;
 
     public float meshResolution = 3;
     public int edgeResolveIterations = 4;
@@ -44,6 +44,8 @@ public class FieldOfView : MonoBehaviour
         {
             instance = this;
         }
+
+        LevelManager.instance.IncreaseEnemyCount();
     }
     void Start()
     {
@@ -86,27 +88,27 @@ public class FieldOfView : MonoBehaviour
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask))
                     {
                         targetIsDetected = true;
-                        lastSeen = true;
+                        //lastSeen = true;
                     }
                     else
                     {
-                        if (!lastSeen)
-                            targetIsDetected = false;
+                        //if (!lastSeen)
+                        targetIsDetected = false;
                     }
                 }
                 else
                 {
                     targetInFieldOfView = false;
-                    if (!lastSeen)
-                        targetIsDetected = false;
+                    //if (!lastSeen)
+                    targetIsDetected = false;
                 }
             }
             else
             {
                 targetInViewRadius = false;
                 targetInFieldOfView = false;
-                if (!lastSeen)
-                    targetIsDetected = false;
+                //if (!lastSeen)
+                targetIsDetected = false;
             }
         }
     }
