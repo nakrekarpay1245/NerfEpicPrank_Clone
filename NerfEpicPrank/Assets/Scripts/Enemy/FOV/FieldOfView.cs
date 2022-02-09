@@ -44,11 +44,11 @@ public class FieldOfView : MonoBehaviour
         {
             instance = this;
         }
-
-        LevelManager.instance.IncreaseEnemyCount();
     }
     void Start()
     {
+        LevelManager.instance.IncreaseEnemyCount();
+
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;

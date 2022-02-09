@@ -33,6 +33,7 @@ public class SuspicionState : IState
         animator.SetBool("isIdle", true);
         audioSource.clip = audioClip;
         alarmDisplay.SetActive(true);
+        EnemyHealth.instance.impact = false;
     }
 
     public void OnStateExit()
@@ -111,7 +112,7 @@ public class SuspicionState : IState
 
     private bool SuspicionToChaseAlarmControl()
     {
-        Debug.Log("Suspicion to Chase Control : " + chaseAlarmTimer);
+        //Debug.Log("Suspicion to Chase Control : " + chaseAlarmTimer);
 
         chaseAlarmTimer += Time.deltaTime;
         if (chaseAlarmTimer >= EnemyAI.instance.chaseAlarmTime)
@@ -125,7 +126,7 @@ public class SuspicionState : IState
 
     private bool SuspicionToSearchAlarmControl()
     {
-        Debug.Log("Suspicion to Search Control");
+        //Debug.Log("Suspicion to Search Control");
 
         searchAlarmTimer += Time.deltaTime;
         if (searchAlarmTimer >= EnemyAI.instance.searchAlarmTime)

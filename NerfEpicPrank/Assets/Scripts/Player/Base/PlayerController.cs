@@ -15,10 +15,8 @@ public class PlayerController : MonoBehaviour
     private PatrolState patrolState;
 
     public Vector3 hidePosition;
-    public Quaternion hideRotation;
 
     public Vector3 attackPosition;
-    public Quaternion attackRotation;
 
     public Transform exitTransform;
     #endregion
@@ -38,6 +36,9 @@ public class PlayerController : MonoBehaviour
     [Header("Hareket Hızı")]
     public float moveSpeed;
 
+    [Header("Hareket Hızı")]
+    public float rotationSpeed;
+
     public GameObject playerModel;
 
     public AudioClip attackClip;
@@ -49,6 +50,9 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController instance;
 
+    public GameObject currentEnemy;
+
+   // public Quaternion startRotation;
 
     private void Awake()
     {
@@ -190,20 +194,21 @@ public class PlayerController : MonoBehaviour
 
     private HideState NewHide()
     {
-        hideState = new HideState(HideCallback, hidePosition, hideRotation,
-            playerModel, audioSource, animator, hideClip);
+        hideState = new HideState(HideCallback, playerModel, audioSource,
+            animator, hideClip, moveSpeed);
         return hideState;
     }
 
     private AttackState NewAttack()
     {
-        attackState = new AttackState(AttackCallback, weapon, attackPosition,
-            attackRotation, playerModel, audioSource, animator, attackClip);
+        attackState = new AttackState(AttackCallback, weapon, playerModel,
+            audioSource, animator, attackClip, moveSpeed, rotationSpeed);
         return attackState;
     }
     private RunState NewRun()
     {
-        runState = new RunState(RunCallback, moveSpeed, exitTransform, audioSource, animator, attackClip);
+        runState = new RunState(RunCallback, moveSpeed, rotationSpeed, exitTransform, audioSource, animator,
+            attackClip);
         return runState;
     }
     private PatrolState NewPatrol()

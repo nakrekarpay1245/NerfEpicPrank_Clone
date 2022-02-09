@@ -13,6 +13,9 @@ public class SearchState : IState
     public float speed;
 
     public GameObject alarmDisplay;
+
+    public float suspicionAlarmTimer;
+
     public SearchState(Action<int> Callback, AudioSource audioSource, Animator animator,
         AudioClip audioClip, float speed, GameObject alarmDisplay)
     {
@@ -43,14 +46,21 @@ public class SearchState : IState
 
     public void OnStateUpdate()
     {
+        suspicionAlarmTimer = Mathf.Clamp(suspicionAlarmTimer, 0, Mathf.Infinity);
+
         Debug.Log("Search Update");
 
-        if (FieldOfView.instance.targetIsDetected)
+        if (FieldOfView.instance.targetIsDetected || EnemyHealth.instance.impact)
         {
-            Callback(2);
+            if (SearchToSuspicionAlarmControl())
+            {
+                Callback(2);
+            }
         }
         else
         {
+            suspicionAlarmTimer -= Time.deltaTime;
+
             if (!audioSource.isPlaying)
             {
                 audioSource.Play();
@@ -62,5 +72,18 @@ public class SearchState : IState
     private void RotateAround()
     {
         EnemyAI.instance.transform.Rotate(Vector3.up * speed * Time.deltaTime);
+    }
+    private bool SearchToSuspicionAlarmControl()
+    {
+        //Debug.Log("Search to Chase suspicion : " + suspicionAlarmTimer);
+
+        suspicionAlarmTimer += Time.deltaTime;
+        if (suspicionAlarmTimer >= EnemyAI.instance.suspicionAlarmTime)
+        {
+            Debug.Log("Search to Suspicion");
+            return true;
+        }
+        else
+            return false;
     }
 }

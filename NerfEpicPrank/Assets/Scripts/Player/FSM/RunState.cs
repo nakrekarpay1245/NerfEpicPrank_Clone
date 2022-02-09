@@ -5,18 +5,20 @@ public class RunState : IState
 {
     public Action<int> Callback;
 
-    public float speed;
+    public float moveSpeed;
+    public float rotationSpeed;
     public Transform exitTransform;
 
     public AudioSource audioSource;
     public Animator animator;
 
     public AudioClip audioClip;
-    public RunState(Action<int> Callback, float speed, Transform exitTransform, AudioSource audioSource,
-        Animator animator, AudioClip audioClip)
+    public RunState(Action<int> Callback, float moveSpeed, float rotationSpeed, Transform exitTransform,
+        AudioSource audioSource, Animator animator, AudioClip audioClip)
     {
         this.Callback = Callback;
-        this.speed = speed;
+        this.moveSpeed = moveSpeed;
+        this.rotationSpeed = rotationSpeed;
         this.exitTransform = exitTransform;
         this.audioSource = audioSource;
         this.animator = animator;
@@ -48,16 +50,17 @@ public class RunState : IState
     }
     private void LookToExit()
     {
-        Quaternion rotationTarget = Quaternion.LookRotation(exitTransform.position -
-           PlayerController.instance.transform.position);
+        Debug.Log("Look To Exit");
+        Quaternion rotationTarget = Quaternion.LookRotation(PlayerController.instance.transform.position -
+            exitTransform.position);
         PlayerController.instance.transform.rotation =
             Quaternion.RotateTowards(PlayerController.instance.transform.rotation,
-            rotationTarget, Time.deltaTime * speed);
+            rotationTarget, Time.deltaTime * rotationSpeed * 100);
     }
     private void RunToExit()
     {
         Vector3 followPosition = Vector3.Lerp(PlayerController.instance.transform.position,
-           exitTransform.position, Time.deltaTime * speed * 0.25f);
+           exitTransform.position, Time.deltaTime * moveSpeed * 0.25f);
         PlayerController.instance.transform.position = followPosition;
     }
 }

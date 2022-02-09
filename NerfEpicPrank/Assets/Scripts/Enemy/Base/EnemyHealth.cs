@@ -8,6 +8,8 @@ public class EnemyHealth : MonoBehaviour
     public int health;
 
     public Text healthText;
+
+    public bool impact;
     private void Awake()
     {
         if (instance == null)
@@ -24,6 +26,10 @@ public class EnemyHealth : MonoBehaviour
         {
             gameObject.SetActive(false);
             LevelManager.instance.DecreaseEnemyCount();
+        }
+        else
+        {
+            impact = true;
         }
     }
 }

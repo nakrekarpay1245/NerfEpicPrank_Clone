@@ -37,8 +37,10 @@ public class EnemyAI : MonoBehaviour
     [Header("Alarm Değişkenleri")]
     [Tooltip("Chase' e geçerken alarm süresi")]
     public float chaseAlarmTime;
+
     [Tooltip("Suspicion' a geçerken alarm süresi")]
     public float suspicionAlarmTime;
+
     [Tooltip("Search' a geçerken alarm süresi")]
     public float searchAlarmTime;
 

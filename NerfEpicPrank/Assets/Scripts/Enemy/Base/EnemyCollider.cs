@@ -8,7 +8,6 @@ public class EnemyCollider : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerBullet"))
         {
-            EnemyAI.instance.Suspicion();
             EnemyHealth.instance.TakeDamage();
             other.gameObject.GetComponent<Rigidbody>().useGravity = true;
             other.gameObject.layer = 12;

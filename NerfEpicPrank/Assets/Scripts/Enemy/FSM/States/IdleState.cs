@@ -12,6 +12,8 @@ public class IdleState : IState
 
     public GameObject alarmDisplay;
 
+    public float suspicionAlarmTimer;
+
     public IdleState(Action<int> Callback, AudioSource audioSource, Animator animator,
         AudioClip audioClip, GameObject alarmDisplay)
     {
@@ -41,16 +43,39 @@ public class IdleState : IState
 
     public void OnStateUpdate()
     {
-        if (FieldOfView.instance.targetIsDetected)
+        suspicionAlarmTimer = Mathf.Clamp(suspicionAlarmTimer, 0, Mathf.Infinity);
+
+        Debug.Log("Idle Update");
+
+        if (FieldOfView.instance.targetIsDetected || EnemyHealth.instance.impact)
         {
-            Callback(2);
+            if (IdleToSuspicionAlarmControl())
+            {
+                Callback(2);
+            }
         }
         else
         {
+            suspicionAlarmTimer -= Time.deltaTime;
+
             if (!audioSource.isPlaying)
             {
                 audioSource.Play();
             }
         }
+    }
+
+    private bool IdleToSuspicionAlarmControl()
+    {
+        //Debug.Log("Idle to Suspicion Control : " + suspicionAlarmTimer);
+
+        suspicionAlarmTimer += Time.deltaTime;
+        if (suspicionAlarmTimer >= EnemyAI.instance.suspicionAlarmTime)
+        {
+            Debug.Log("Idle to Suspicion");
+            return true;
+        }
+        else
+            return false;
     }
 }

@@ -12,4 +12,13 @@ public class PlayerCollider : MonoBehaviour
             other.gameObject.GetComponent<Rigidbody>().useGravity = true;
         }
     }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("HideArea"))
+        {
+            PlayerController.instance.hidePosition = other.gameObject.GetComponent<HideArea>().hidePosition;
+            PlayerController.instance.attackPosition = other.gameObject.GetComponent<HideArea>().attackPosition;
+            PlayerController.instance.currentEnemy = other.gameObject.GetComponent<HideArea>().currentEnemy;
+        }
+    }
 }

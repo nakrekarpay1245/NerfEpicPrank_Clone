@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 9013405053632098426}
   m_Layer: 13
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -288,8 +288,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateMachine: {fileID: 9013405053632098426}
   hidePosition: {x: 0, y: 0, z: 0}
-  hideRotation: {x: 0, y: 180, z: 0, w: 0}
-  attackPosition: {x: -1, y: 0, z: 0}
+  hideRotation: {x: 0, y: 0, z: 0, w: 0}
+  attackPosition: {x: 0, y: 0, z: 0}
   attackRotation: {x: 0, y: 0, z: 0, w: 0}
   exitTransform: {fileID: 0}
   animator: {fileID: 0}
@@ -392,7 +392,7 @@ PrefabInstance:
     - target: {fileID: 4946223620883396643, guid: e8513f7b56d426848b5fd212561c126f,
         type: 3}
       propertyPath: fireRate
-      value: 0.25
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4946223621565017575, guid: e8513f7b56d426848b5fd212561c126f,
         type: 3}

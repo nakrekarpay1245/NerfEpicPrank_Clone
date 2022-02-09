@@ -7,9 +7,6 @@ public class AttackState : IState
 
     public Weapon weapon;
 
-    public Vector3 statePosition;
-    public Quaternion stateRotation;
-
     public GameObject playerModel;
 
     public AudioSource audioSource;
@@ -17,26 +14,27 @@ public class AttackState : IState
 
     public AudioClip audioClip;
 
-    public AttackState(Action<int> Callback, Weapon weapon, Vector3 statePosition,
-        Quaternion stateRotation, GameObject playerModel, AudioSource audioSource, 
-        Animator animator, AudioClip audioClip)
+    public float moveSpeed;
+
+    public float rotationSpeed;
+    public AttackState(Action<int> Callback, Weapon weapon, GameObject playerModel,
+        AudioSource audioSource, Animator animator, AudioClip audioClip, float moveSpeed,
+        float rotationSpeed)
     {
         this.Callback = Callback;
         this.weapon = weapon;
-        this.statePosition = statePosition;
-        this.stateRotation = stateRotation;
         this.playerModel = playerModel;
         this.audioSource = audioSource;
         this.animator = animator;
         this.audioClip = audioClip;
+        this.moveSpeed = moveSpeed;
+        this.rotationSpeed = rotationSpeed;
     }
     public void OnStateEnter()
     {
         Debug.Log("Attack Enter");
-        playerModel.transform.localPosition = statePosition;
-        playerModel.transform.localRotation = stateRotation;
 
-        animator.SetBool("isRun", true);
+        animator.SetTrigger("isAttack");
         audioSource.clip = audioClip;
     }
 
@@ -53,11 +51,31 @@ public class AttackState : IState
 
     public void OnStateUpdate()
     {
+        RunToPosition();
+        LookToRotation();
         Debug.Log("Attack Update");
         weapon.Fire();
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             Callback(0);
         }
+    }
+    private void RunToPosition()
+    {
+        Vector3 runPosition = Vector3.Lerp(PlayerController.instance.transform.position,
+           PlayerController.instance.attackPosition, Time.deltaTime * moveSpeed * 2);
+        PlayerController.instance.transform.position = runPosition;
+    }
+
+    public void LookToRotation()
+    {
+        Debug.Log("Look To Enemy in Attack");
+        Quaternion rotationTarget =
+            Quaternion.LookRotation(PlayerController.instance.transform.position -
+            PlayerController.instance.currentEnemy.transform.position);
+
+        PlayerController.instance.transform.rotation =
+            Quaternion.RotateTowards(PlayerController.instance.transform.rotation,
+                rotationTarget, Time.deltaTime * rotationSpeed * 100);
     }
 }

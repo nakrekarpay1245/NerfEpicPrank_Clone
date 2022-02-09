@@ -5,34 +5,28 @@ public class HideState : IState
 {
     public Action<int> Callback;
 
-    public Vector3 statePosition;
-    public Quaternion stateRotation;
-
     public GameObject playerModel;
-    
+
     public AudioSource audioSource;
     public Animator animator;
 
     public AudioClip audioClip;
-    public HideState(Action<int> Callback, Vector3 statePosition, 
-        Quaternion stateRotation, GameObject playerModel, AudioSource audioSource, 
-        Animator animator, AudioClip audioClip)
+
+    public float speed;
+    public HideState(Action<int> Callback, GameObject playerModel, AudioSource audioSource,
+        Animator animator, AudioClip audioClip, float speed)
     {
         this.Callback = Callback;
-        this.statePosition = statePosition;
-        this.stateRotation = stateRotation;
         this.playerModel = playerModel;
         this.audioSource = audioSource;
         this.animator = animator;
         this.audioClip = audioClip;
+        this.speed = speed;
     }
     public void OnStateEnter()
     {
         Debug.Log("Hide Enter");
-        playerModel.transform.localPosition = statePosition;
-        playerModel.transform.localRotation = stateRotation;
-
-        animator.SetBool("isRun", true);
+        animator.SetBool("isIdle", true);
         audioSource.clip = audioClip;
     }
 
@@ -48,10 +42,18 @@ public class HideState : IState
 
     public void OnStateUpdate()
     {
+        RunToPosition();
+
         Debug.Log("Hide Update");
         if (Input.GetKey(KeyCode.Mouse0))
         {
             Callback(1);
         }
+    }
+    private void RunToPosition()
+    {
+        Vector3 runPosition = Vector3.Lerp(PlayerController.instance.transform.position,
+           PlayerController.instance.hidePosition, Time.deltaTime * speed * 2);
+        PlayerController.instance.transform.position = runPosition;
     }
 }

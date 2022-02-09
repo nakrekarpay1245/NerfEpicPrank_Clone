@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        nextTimeToFire = fireRate;
+        nextTimeToFire = 1;
         audioSource = GetComponent<AudioSource>();
     }
     public void Fire()
