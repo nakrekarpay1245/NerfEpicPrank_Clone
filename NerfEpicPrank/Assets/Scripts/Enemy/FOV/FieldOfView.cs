@@ -36,15 +36,15 @@ public class FieldOfView : MonoBehaviour
     public MeshFilter viewMeshFilter;
     Mesh viewMesh;
 
-    public static FieldOfView instance;
+    //public static FieldOfView instance;
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-    }
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //    }
+    //}
     void Start()
     {
         LevelManager.instance.IncreaseEnemyCount();
@@ -68,6 +68,7 @@ public class FieldOfView : MonoBehaviour
 
     void LateUpdate()
     {
+        //currentViewAngle = Mathf.Clamp(currentViewAngle, 10, viewAngle);
         DrawFieldOfView();
     }
 

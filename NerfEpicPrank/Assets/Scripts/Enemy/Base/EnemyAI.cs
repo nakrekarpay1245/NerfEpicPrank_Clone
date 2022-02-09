@@ -20,6 +20,7 @@ public class EnemyAI : MonoBehaviour
     #region COMPONENT PARAMETERS
     [Header("Components")]
     [HideInInspector] public FieldOfView fieldOfView;
+    [HideInInspector] public EnemyHealth enemyHealth;
     [HideInInspector] public Animator animator;
     [HideInInspector] public AudioSource audioSource;
 
@@ -53,24 +54,26 @@ public class EnemyAI : MonoBehaviour
     #endregion
 
 
-    public static EnemyAI instance;
+    //public static EnemyAI instance;
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-    }
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //    }
+    //}
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         fieldOfView = GetComponent<FieldOfView>();
+        enemyHealth = GetComponent<EnemyHealth>();
         target = fieldOfView.target.transform;
         StateGenerator();
         Idle();
+        //gameObject.SetActive(false);
     }
     private void Update()
     {
@@ -243,30 +246,31 @@ public class EnemyAI : MonoBehaviour
 
     private ChaseState NewChase()
     {
-        chaseState = new ChaseState(ChaseCallback, audioSource, animator, searchClip, moveSpeed);
+        chaseState = new ChaseState(ChaseCallback, audioSource, animator, searchClip, moveSpeed,
+            fieldOfView, enemyHealth, this);
         return chaseState;
     }
     private ShootState NewShoot()
     {
-        shootState = new ShootState(ShootCallback);
+        shootState = new ShootState(ShootCallback, fieldOfView, enemyHealth, this);
         return shootState;
     }
     private IdleState NewIdle()
     {
-        idleState = new IdleState(IdleCallback, audioSource, animator,
-            idleClip, alarmDisplay);
+        idleState = new IdleState(IdleCallback, audioSource, animator, idleClip, alarmDisplay,
+            fieldOfView, enemyHealth, this);
         return idleState;
     }
     private SuspicionState NewSuspicion()
     {
         suspicionState = new SuspicionState(SuspicionCallback, audioSource, animator,
-            searchClip, rotateSpeed, alarmDisplay);
+            searchClip, rotateSpeed, alarmDisplay, fieldOfView, enemyHealth, this);
         return suspicionState;
     }
     private SearchState NewSearch()
     {
         searchState = new SearchState(SearchCallback, audioSource, animator,
-            searchClip, rotateSpeed, alarmDisplay);
+            searchClip, rotateSpeed, alarmDisplay, fieldOfView, enemyHealth, this);
         return searchState;
     }
     #endregion

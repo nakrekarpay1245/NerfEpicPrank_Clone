@@ -11,14 +11,22 @@ public class ChaseState : IState
     public AudioClip audioClip;
 
     public float speed;
+
+    public FieldOfView fieldOfView;
+    public EnemyHealth enemyHealth;
+    public EnemyAI enemyAI;
     public ChaseState(Action<int> Callback, AudioSource audioSource, Animator animator,
-        AudioClip audioClip, float speed)
+        AudioClip audioClip, float speed, FieldOfView fieldOfView, EnemyHealth enemyHealth,
+        EnemyAI enemyAI)
     {
         this.Callback = Callback;
         this.audioSource = audioSource;
         this.animator = animator;
         this.audioClip = audioClip;
         this.speed = speed;
+        this.fieldOfView = fieldOfView;
+        this.enemyHealth = enemyHealth;
+        this.enemyAI = enemyAI;
     }
     public void OnStateEnter()
     {
@@ -51,16 +59,16 @@ public class ChaseState : IState
     private void LookToTarget()
     {
         Debug.Log("Look To Target in Chase");
-        Quaternion rotationTarget = Quaternion.LookRotation(FieldOfView.instance.targetPosition -
-            EnemyAI.instance.transform.position);
-        EnemyAI.instance.transform.rotation = Quaternion.RotateTowards(EnemyAI.instance.transform.rotation,
+        Quaternion rotationTarget = Quaternion.LookRotation(fieldOfView.targetPosition -
+            enemyAI.transform.position);
+        enemyAI.transform.rotation = Quaternion.RotateTowards(enemyAI.transform.rotation,
             rotationTarget, Time.deltaTime * speed);
     }
     private void FollowTarget()
     {
         Debug.Log("Follow To Target in Chase");
-        Vector3 followPosition = Vector3.Lerp(EnemyAI.instance.transform.position,
-            FieldOfView.instance.targetPosition, Time.deltaTime * speed * 0.25f);
-        EnemyAI.instance.transform.position = followPosition;
+        Vector3 followPosition = Vector3.Lerp(enemyAI.transform.position,
+            fieldOfView.targetPosition, Time.deltaTime * speed * 0.25f);
+        enemyAI.transform.position = followPosition;
     }
 }

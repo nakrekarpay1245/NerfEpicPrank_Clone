@@ -14,14 +14,22 @@ public class IdleState : IState
 
     public float suspicionAlarmTimer;
 
+    public FieldOfView fieldOfView;
+    public EnemyHealth enemyHealth;
+    public EnemyAI enemyAI;
+
     public IdleState(Action<int> Callback, AudioSource audioSource, Animator animator,
-        AudioClip audioClip, GameObject alarmDisplay)
+        AudioClip audioClip, GameObject alarmDisplay, FieldOfView fieldOfView, EnemyHealth enemyHealth,
+        EnemyAI enemyAI)
     {
         this.Callback = Callback;
         this.audioSource = audioSource;
         this.animator = animator;
         this.audioClip = audioClip;
         this.alarmDisplay = alarmDisplay;
+        this.fieldOfView = fieldOfView;
+        this.enemyHealth = enemyHealth;
+        this.enemyAI = enemyAI;
     }
     public void OnStateEnter()
     {
@@ -47,7 +55,7 @@ public class IdleState : IState
 
         Debug.Log("Idle Update");
 
-        if (FieldOfView.instance.targetIsDetected || EnemyHealth.instance.impact)
+        if (fieldOfView.targetIsDetected)
         {
             if (IdleToSuspicionAlarmControl())
             {
@@ -63,6 +71,12 @@ public class IdleState : IState
                 audioSource.Play();
             }
         }
+
+        if (enemyHealth.impact)
+        {
+            Debug.Log("Idle to Search");
+            Callback(4);
+        }
     }
 
     private bool IdleToSuspicionAlarmControl()
@@ -70,7 +84,7 @@ public class IdleState : IState
         //Debug.Log("Idle to Suspicion Control : " + suspicionAlarmTimer);
 
         suspicionAlarmTimer += Time.deltaTime;
-        if (suspicionAlarmTimer >= EnemyAI.instance.suspicionAlarmTime)
+        if (suspicionAlarmTimer >= enemyAI.suspicionAlarmTime)
         {
             Debug.Log("Idle to Suspicion");
             return true;

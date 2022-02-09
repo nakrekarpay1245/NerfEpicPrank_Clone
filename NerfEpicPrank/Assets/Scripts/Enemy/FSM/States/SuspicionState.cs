@@ -16,8 +16,13 @@ public class SuspicionState : IState
 
     public float chaseAlarmTimer;
     public float searchAlarmTimer;
+
+    public FieldOfView fieldOfView;
+    public EnemyHealth enemyHealth;
+    public EnemyAI enemyAI;
     public SuspicionState(Action<int> Callback, AudioSource audioSource, Animator animator,
-        AudioClip audioClip, float speed, GameObject alarmDisplay)
+        AudioClip audioClip, float speed, GameObject alarmDisplay, FieldOfView fieldOfView, 
+        EnemyHealth enemyHealth, EnemyAI enemyAI)
     {
         this.Callback = Callback;
         this.audioSource = audioSource;
@@ -25,6 +30,9 @@ public class SuspicionState : IState
         this.audioClip = audioClip;
         this.speed = speed;
         this.alarmDisplay = alarmDisplay;
+        this.fieldOfView = fieldOfView;
+        this.enemyHealth = enemyHealth;
+        this.enemyAI = enemyAI;
     }
 
     public void OnStateEnter()
@@ -33,7 +41,7 @@ public class SuspicionState : IState
         animator.SetBool("isIdle", true);
         audioSource.clip = audioClip;
         alarmDisplay.SetActive(true);
-        EnemyHealth.instance.impact = false;
+        enemyHealth.impact = false;
     }
 
     public void OnStateExit()
@@ -50,17 +58,16 @@ public class SuspicionState : IState
     {
         chaseAlarmTimer = Mathf.Clamp(chaseAlarmTimer, 0, Mathf.Infinity);
         Debug.Log("Suspicion Update");
-        if (!FieldOfView.instance.targetIsDetected)
+        if (!fieldOfView.targetIsDetected)
         {
             chaseAlarmTimer -= Time.deltaTime;
 
             //Debug.Log("Target is not detected");
 
-            if (FieldOfView.instance.targetInFieldOfView)
+            if (fieldOfView.targetInFieldOfView)
             {
                 //Debug.Log("Target in fov");
 
-                //FieldOfView.instance.lastSeen = false;
                 //sus to sear
                 if (SuspicionToSearchAlarmControl())
                 {
@@ -79,10 +86,9 @@ public class SuspicionState : IState
                 LookToTarget();
             }
         }
-        else if (FieldOfView.instance.targetIsDetected)
+        else if (fieldOfView.targetIsDetected)
         {
             searchAlarmTimer = 0;
-
             //Debug.Log("Target detected");
             if (SuspicionToChaseAlarmControl())
             {
@@ -103,19 +109,18 @@ public class SuspicionState : IState
     private void LookToTarget()
     {
         //Debug.Log("Look To Target");
-        Quaternion rotationTarget = Quaternion.LookRotation(FieldOfView.instance.targetPosition -
-            EnemyAI.instance.transform.position);
-        EnemyAI.instance.transform.rotation = Quaternion.RotateTowards(EnemyAI.instance.transform.rotation,
+        Quaternion rotationTarget = Quaternion.LookRotation(fieldOfView.targetPosition -
+            enemyAI.transform.position);
+        enemyAI.transform.rotation = Quaternion.RotateTowards(enemyAI.transform.rotation,
             rotationTarget, Time.deltaTime * speed);
     }
-
 
     private bool SuspicionToChaseAlarmControl()
     {
         //Debug.Log("Suspicion to Chase Control : " + chaseAlarmTimer);
 
         chaseAlarmTimer += Time.deltaTime;
-        if (chaseAlarmTimer >= EnemyAI.instance.chaseAlarmTime)
+        if (chaseAlarmTimer >= enemyAI.chaseAlarmTime)
         {
             Debug.Log("Suspicion to Chase");
             return true;
@@ -129,7 +134,7 @@ public class SuspicionState : IState
         //Debug.Log("Suspicion to Search Control");
 
         searchAlarmTimer += Time.deltaTime;
-        if (searchAlarmTimer >= EnemyAI.instance.searchAlarmTime)
+        if (searchAlarmTimer >= enemyAI.searchAlarmTime)
         {
             Debug.Log("Suspicion to Search");
             return true;

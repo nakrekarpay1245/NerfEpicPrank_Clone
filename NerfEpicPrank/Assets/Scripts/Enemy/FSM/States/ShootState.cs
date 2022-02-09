@@ -5,9 +5,16 @@ public class ShootState : IState
 {
     public Action<int> Callback;
 
-    public ShootState(Action<int> Callback)
+    public FieldOfView fieldOfView;
+    public EnemyHealth enemyHealth;
+    public EnemyAI enemyAI;
+    public ShootState(Action<int> Callback, FieldOfView fieldOfView, EnemyHealth enemyHealth,
+        EnemyAI enemyAI)
     {
         this.Callback = Callback;
+        this.fieldOfView = fieldOfView;
+        this.enemyHealth = enemyHealth;
+        this.enemyAI = enemyAI;
     }
     public void OnStateEnter()
     {

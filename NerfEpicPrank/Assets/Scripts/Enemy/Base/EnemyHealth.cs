@@ -3,21 +3,21 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public static EnemyHealth instance;
+    //public static EnemyHealth instance;
 
     public int health;
 
     public Text healthText;
 
     public bool impact;
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        healthText.text = health.ToString();
-    }
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //    }
+    //    healthText.text = health.ToString();
+    //}
     public void TakeDamage()
     {
         health--;

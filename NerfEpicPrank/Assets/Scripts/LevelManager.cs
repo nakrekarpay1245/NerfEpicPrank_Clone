@@ -17,7 +17,10 @@ public class LevelManager : MonoBehaviour
     public Text moneyText;
     public GameObject tutorial;
     public GameObject enemyDisplay;
-    public GameObject circle;
+    public GameObject circlePrefab;
+    public GameObject circleInsidePrefab;
+    public List<GameObject> circles;
+    public List<GameObject> circleInsides;
     private void Awake()
     {
         if (instance == null)
@@ -68,7 +71,15 @@ public class LevelManager : MonoBehaviour
     {
         for (int i = 0; i < enemyCount; i++)
         {
-            Instantiate(circle, enemyDisplay.transform);
+            GameObject currentCircle = Instantiate(circlePrefab, enemyDisplay.transform);
+            circles.Add(currentCircle);
+            GameObject currentCircleInside = Instantiate(circleInsidePrefab, currentCircle.transform);
+            circleInsides.Add(currentCircleInside);
+            currentCircleInside.SetActive(false);
         }
+    }
+    public void DisplayCircleInsides()
+    {
+        circleInsides[0].SetActive(true);
     }
 }

@@ -19,6 +19,7 @@ public class PlayerCollider : MonoBehaviour
             PlayerController.instance.hidePosition = other.gameObject.GetComponent<HideArea>().hidePosition;
             PlayerController.instance.attackPosition = other.gameObject.GetComponent<HideArea>().attackPosition;
             PlayerController.instance.currentEnemy = other.gameObject.GetComponent<HideArea>().currentEnemy;
+            //other.gameObject.GetComponent<HideArea>().currentEnemy.SetActive(true);
         }
     }
 }
