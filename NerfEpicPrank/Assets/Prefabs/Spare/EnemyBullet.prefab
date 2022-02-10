@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6384482478659522391}
   - component: {fileID: 6749915231108081717}
   - component: {fileID: 6324904162006507787}
+  - component: {fileID: 1190641918942804112}
   m_Layer: 10
   m_Name: EnemyBullet
   m_TagString: EnemyBullet
@@ -112,6 +113,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &1190641918942804112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3896980197489085866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158915030ae9ecc44b10b5191c114b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1501857627089801454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,6 +132,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 478177814757728593}
     m_Modifications:
+    - target: {fileID: 1711724188630259802, guid: d80903b1335db86448a2b6935fa08186,
+        type: 3}
+      propertyPath: m_Time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711724188630259802, guid: d80903b1335db86448a2b6935fa08186,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711724188630259802, guid: d80903b1335db86448a2b6935fa08186,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711724188630259802, guid: d80903b1335db86448a2b6935fa08186,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711724188630259802, guid: d80903b1335db86448a2b6935fa08186,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4124346324218761488, guid: d80903b1335db86448a2b6935fa08186,
         type: 3}
       propertyPath: m_Name

@@ -49,6 +49,9 @@ MonoBehaviour:
   hidePosition: {x: 5, y: 0.5, z: -5}
   attackPosition: {x: 3, y: 0.5, z: -5}
   currentEnemy: {fileID: 0}
+  xOffset: 0
+  zOffset: -10
+  yOffset: 10
 --- !u!54 &4937256916283754714
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -95,6 +98,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5505088222190983402, guid: c780e8c1165d4534d87a52fd54279197,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 5505088222190983414, guid: c780e8c1165d4534d87a52fd54279197,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -103,7 +111,7 @@ PrefabInstance:
     - target: {fileID: 5505088222190983414, guid: c780e8c1165d4534d87a52fd54279197,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5505088222190983414, guid: c780e8c1165d4534d87a52fd54279197,
         type: 3}
@@ -149,6 +157,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505088222190983414, guid: c780e8c1165d4534d87a52fd54279197,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c780e8c1165d4534d87a52fd54279197, type: 3}

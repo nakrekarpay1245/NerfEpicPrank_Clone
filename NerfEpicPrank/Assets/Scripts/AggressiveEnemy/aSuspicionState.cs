@@ -42,8 +42,8 @@ public class aSuspicionState : IState
         animator.SetBool("isSuspicion", true);
         animator.SetBool("isIdle", false);
         audioSource.clip = audioClip;
-        alarmDisplay.SetActive(true);
-        enemyHealth.impact = false;
+        alarmDisplay.SetActive(false);
+        fieldOfView.viewMeshFilter.gameObject.SetActive(true);
     }
 
     public void OnStateExit()
@@ -60,25 +60,14 @@ public class aSuspicionState : IState
     {
         shootAlarmTimer = Mathf.Clamp(shootAlarmTimer, 0, Mathf.Infinity);
         Debug.Log("Suspicion Update");
-        if (fieldOfView.targetIsDetected)
+
+        if (enemyHealth.impact)
         {
-            Debug.Log("Target is detected");
+            LookToTarget();
             if (SuspicionToShootAlarmControl())
             {
-                Debug.Log("to shoot");
                 Callback(1);
             }
-            else
-            {
-                Debug.Log("look target");
-                LookToTarget();
-            }
-        }
-        else
-        {
-            Debug.Log("Target is not detected");
-            shootAlarmTimer -= Time.deltaTime;
-            LookToTarget();
         }
     }
 
@@ -93,7 +82,7 @@ public class aSuspicionState : IState
 
     private bool SuspicionToShootAlarmControl()
     {
-        //Debug.Log("Suspicion to Shoot Control : " + shootAlarmTimer);
+        Debug.Log("Suspicion to Shoot Control : " + shootAlarmTimer);
 
         shootAlarmTimer += Time.deltaTime;
         if (shootAlarmTimer >= enemyAI.shootAlarmTime)

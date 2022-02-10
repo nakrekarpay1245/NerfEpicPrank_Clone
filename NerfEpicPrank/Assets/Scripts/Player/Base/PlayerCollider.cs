@@ -9,9 +9,6 @@ public class PlayerCollider : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyBullet"))
         {
             PlayerController.instance.Run();
-            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
-            other.gameObject.GetComponentInChildren<TrailRenderer>().enabled = false;
-            other.gameObject.layer = 12;
             Debug.Log("Player Hitted");
         }
     }
@@ -22,6 +19,9 @@ public class PlayerCollider : MonoBehaviour
             PlayerController.instance.hidePosition = other.gameObject.GetComponent<HideArea>().hidePosition;
             PlayerController.instance.attackPosition = other.gameObject.GetComponent<HideArea>().attackPosition;
             PlayerController.instance.currentEnemy = other.gameObject.GetComponent<HideArea>().currentEnemy;
+            CameraMovement.instance.xOffset = other.gameObject.GetComponent<HideArea>().xOffset;
+            CameraMovement.instance.yOffset = other.gameObject.GetComponent<HideArea>().yOffset;
+            CameraMovement.instance.zOffset = other.gameObject.GetComponent<HideArea>().zOffset;
             //other.gameObject.GetComponent<HideArea>().currentEnemy.SetActive(true);
         }
     }

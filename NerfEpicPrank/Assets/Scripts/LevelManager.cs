@@ -59,6 +59,7 @@ public class LevelManager : MonoBehaviour
             PlayerController.instance.Patrol();
             Debug.Log("Change Patrol Point");
         }
+        UserInterfaceManager.instance.DisplayCircleInsides();
     }
 
     public void LevelCompleted()

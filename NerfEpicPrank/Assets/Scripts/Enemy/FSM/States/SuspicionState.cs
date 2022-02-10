@@ -47,6 +47,8 @@ public class SuspicionState : IState
         audioSource.clip = audioClip;
         alarmDisplay.SetActive(true);
         enemyHealth.impact = false;
+
+        fieldOfView.viewMeshFilter.gameObject.SetActive(true);
     }
 
     public void OnStateExit()

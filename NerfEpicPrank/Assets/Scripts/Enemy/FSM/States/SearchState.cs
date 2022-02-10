@@ -47,6 +47,8 @@ public class SearchState : IState
         audioSource.clip = audioClip;
         alarmDisplay.SetActive(false);
         alarmImage.fillAmount = 0;
+
+        fieldOfView.viewMeshFilter.gameObject.SetActive(true);
     }
 
     public void OnStateExit()

@@ -13,10 +13,7 @@ public class EnemyCollider : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerBullet"))
         {
-            enemyHealth.TakeDamage();
-            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
-            other.gameObject.GetComponentInChildren<TrailRenderer>().enabled = false;
-            other.gameObject.layer = 12;
+            enemyHealth.TakeDamage();           
             LevelManager.instance.IncreaseMoney();
         }
     }

@@ -3,23 +3,14 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    //public static EnemyHealth instance;
-
     public int health;
 
     public Text healthText;
 
     public bool impact;
-    //private void Awake()
-    //{
-    //    if (instance == null)
-    //    {
-    //        instance = this;
-    //    }
-    //    healthText.text = health.ToString();
-    //}
     public void TakeDamage()
     {
+        Debug.Log("nabre" + impact) ;
         health--;
         healthText.text = health.ToString();
         if (health <= 0)
@@ -29,6 +20,8 @@ public class EnemyHealth : MonoBehaviour
         }
         else
         {
+            Debug.Log("nabre" + impact);
+
             impact = true;
         }
     }

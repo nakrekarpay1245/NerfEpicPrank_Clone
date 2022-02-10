@@ -40,7 +40,7 @@ public class UserInterfaceManager : MonoBehaviour
         retryButton.SetActive(false);
         nextButton.SetActive(false);
 
-        levelText.text = levelNumber.ToString();
+        levelText.text = "Level " + levelNumber.ToString();
     }
 
     public void LevelChanger(int number)

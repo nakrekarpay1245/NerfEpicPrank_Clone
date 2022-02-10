@@ -38,7 +38,8 @@ public class aShootState : IState
     public void OnStateEnter()
     {
         Debug.Log("Shoot Enter");
-        animator.SetTrigger("isShoot");
+        isShootTime = true;
+        fieldOfView.viewMeshFilter.gameObject.SetActive(true);
     }
 
     public void OnStateExit()
@@ -57,21 +58,20 @@ public class aShootState : IState
 
         ShootTime();
 
-        if (fieldOfView.targetIsDetected)
+        LookToTarget();
+
+
+        if (isShootTime)
         {
-            LookToTarget();
-            if (isShootTime)
-            {
-                Debug.Log("Shoot Time");
-                weapon.Fire();
-                animator.SetTrigger("isShoot");
-                alarmDisplay.SetActive(true);
-            }
-            else
-            {
-                Debug.Log("No Shoot Time");
-                alarmDisplay.SetActive(false);
-            }
+            Debug.Log("Shoot Time");
+            animator.SetTrigger("isShoot");
+            alarmDisplay.SetActive(true);
+            weapon.Fire();
+        }
+        else
+        {
+            Debug.Log("No Shoot Time");
+            alarmDisplay.SetActive(false);
         }
     }
     private void LookToTarget()

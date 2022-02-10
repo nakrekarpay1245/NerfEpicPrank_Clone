@@ -94,9 +94,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef5458d8b47cee49a4a79fa7f0c0799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 1
+  fireRate: 0.5
   nextTimeToFire: 0
-  bulletForce: 50
+  bulletForce: 25
+  deviation: 0
   bullet: {fileID: 8887113577304307932, guid: 18830c0661daa4b4487f21c4f1b509be, type: 3}
   muzzle: {fileID: 4946223621565017574}
   audioSource: {fileID: 0}

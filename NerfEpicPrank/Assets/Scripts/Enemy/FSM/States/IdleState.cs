@@ -38,9 +38,11 @@ public class IdleState : IState
         animator.SetBool("isSuspicion", false);
         animator.SetBool("isIdle", true);
         animator.SetBool("isRun", false);
-        
+
         audioSource.clip = audioClip;
         alarmDisplay.SetActive(false);
+
+        fieldOfView.viewMeshFilter.gameObject.SetActive(false);
     }
 
     public void OnStateExit()

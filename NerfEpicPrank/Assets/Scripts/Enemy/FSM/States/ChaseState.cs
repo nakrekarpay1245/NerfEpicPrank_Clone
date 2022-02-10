@@ -39,6 +39,8 @@ public class ChaseState : IState
         audioSource.clip = audioClip;
 
         PlayerController.instance.Run();
+
+        fieldOfView.viewMeshFilter.gameObject.SetActive(false);
     }
 
     public void OnStateExit()

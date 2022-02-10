@@ -8,4 +8,10 @@ public class HideArea : MonoBehaviour
     public Vector3 attackPosition;
 
     public GameObject currentEnemy;
+
+    public float xOffset;
+
+    public float zOffset;
+
+    public float yOffset;
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2519497400098942214}
   - component: {fileID: 8786799889326686832}
   - component: {fileID: 8737969285480005687}
+  - component: {fileID: -6545408719697738233}
   m_Layer: 11
   m_Name: PlayerBullet
   m_TagString: PlayerBullet
@@ -112,6 +113,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &-6545408719697738233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8887113577304307932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158915030ae9ecc44b10b5191c114b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2187776612001808305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,6 +132,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6477635815902317123}
     m_Modifications:
+    - target: {fileID: 1711724188630259802, guid: d80903b1335db86448a2b6935fa08186,
+        type: 3}
+      propertyPath: m_Time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711724188630259802, guid: d80903b1335db86448a2b6935fa08186,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.49019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711724188630259802, guid: d80903b1335db86448a2b6935fa08186,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711724188630259802, guid: d80903b1335db86448a2b6935fa08186,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.49019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711724188630259802, guid: d80903b1335db86448a2b6935fa08186,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4124346324218761488, guid: d80903b1335db86448a2b6935fa08186,
         type: 3}
       propertyPath: m_Name
