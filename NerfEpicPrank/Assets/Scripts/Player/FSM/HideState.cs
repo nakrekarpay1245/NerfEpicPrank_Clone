@@ -27,6 +27,7 @@ public class HideState : IState
     {
         Debug.Log("Hide Enter");
         animator.SetBool("isIdle", true);
+        animator.SetBool("isRun", false);
         audioSource.clip = audioClip;
     }
 

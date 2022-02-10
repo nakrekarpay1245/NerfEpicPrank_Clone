@@ -487,11 +487,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateMachine: {fileID: 2608778329379953180}
   fieldOfView: {fileID: 0}
+  enemyHealth: {fileID: 0}
   animator: {fileID: 0}
   audioSource: {fileID: 0}
   target: {fileID: 0}
   moveSpeed: 6
-  rotateSpeed: 20
+  rotateSpeed: 45
   chaseAlarmTime: 3
   suspicionAlarmTime: 2
   searchAlarmTime: 2
@@ -525,6 +526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 940f193df4fe3fa4ea977dc4f42b3fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyHealth: {fileID: 0}
 --- !u!82 &886246793
 AudioSource:
   m_ObjectHideFlags: 0
@@ -652,7 +654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b6604611a40b84cbebb247530e6e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 20
   healthText: {fileID: 2054195846}
   impact: 0
 --- !u!1 &2608778329671591378

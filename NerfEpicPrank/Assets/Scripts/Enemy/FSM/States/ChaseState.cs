@@ -32,7 +32,10 @@ public class ChaseState : IState
     {
         Debug.Log("Game Over");
 
-        animator.SetBool("isRun", true);
+        animator.SetBool("isSuspicion", false);
+        animator.SetBool("isIdle", false);
+        animator.SetBool("isRun", true); 
+        
         audioSource.clip = audioClip;
 
         PlayerController.instance.Run();

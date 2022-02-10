@@ -7,7 +7,7 @@ public class EnemyCollider : MonoBehaviour
     public EnemyHealth enemyHealth;
     private void Awake()
     {
-       enemyHealth =  gameObject.GetComponent<EnemyHealth>();
+        enemyHealth = gameObject.GetComponent<EnemyHealth>();
     }
     private void OnCollisionEnter(Collision other)
     {
@@ -15,7 +15,9 @@ public class EnemyCollider : MonoBehaviour
         {
             enemyHealth.TakeDamage();
             other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            other.gameObject.GetComponentInChildren<TrailRenderer>().enabled = false;
             other.gameObject.layer = 12;
+            LevelManager.instance.IncreaseMoney();
         }
     }
 }

@@ -27,8 +27,11 @@ public class RunState : IState
     public void OnStateEnter()
     {
         Debug.Log("Run Enter");
+        Debug.Log("Level Failed On Player Run State");
+        LevelManager.instance.LevelFailed();
 
         animator.SetBool("isRun", true);
+        animator.SetBool("isIdle", false);
         audioSource.clip = audioClip;
     }
 

@@ -34,7 +34,11 @@ public class IdleState : IState
     public void OnStateEnter()
     {
         Debug.Log("Idle Enter");
+
+        animator.SetBool("isSuspicion", false);
         animator.SetBool("isIdle", true);
+        animator.SetBool("isRun", false);
+        
         audioSource.clip = audioClip;
         alarmDisplay.SetActive(false);
     }

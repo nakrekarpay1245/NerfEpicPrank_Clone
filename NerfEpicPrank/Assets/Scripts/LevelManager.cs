@@ -13,14 +13,8 @@ public class LevelManager : MonoBehaviour
 
     public bool isGameStart;
 
-    public Text levelText;
-    public Text moneyText;
-    public GameObject tutorial;
-    public GameObject enemyDisplay;
-    public GameObject circlePrefab;
-    public GameObject circleInsidePrefab;
-    public List<GameObject> circles;
-    public List<GameObject> circleInsides;
+    public float money;
+    public float levelMoney;
     private void Awake()
     {
         if (instance == null)
@@ -43,8 +37,7 @@ public class LevelManager : MonoBehaviour
     public void GameStart()
     {
         isGameStart = true;
-        tutorial.SetActive(false);
-        DisplayEnemies();
+        UserInterfaceManager.instance.GameStart();
     }
 
     public void IncreaseEnemyCount()
@@ -56,30 +49,31 @@ public class LevelManager : MonoBehaviour
     {
         enemyCount--;
         patrolIndex++;
-        PlayerController.instance.Patrol();
         if (enemyCount <= 0)
         {
             Debug.Log("Level Completed");
+            LevelCompleted();
         }
         else
         {
+            PlayerController.instance.Patrol();
             Debug.Log("Change Patrol Point");
         }
     }
 
-    public void DisplayEnemies()
+    public void LevelCompleted()
     {
-        for (int i = 0; i < enemyCount; i++)
-        {
-            GameObject currentCircle = Instantiate(circlePrefab, enemyDisplay.transform);
-            circles.Add(currentCircle);
-            GameObject currentCircleInside = Instantiate(circleInsidePrefab, currentCircle.transform);
-            circleInsides.Add(currentCircleInside);
-            currentCircleInside.SetActive(false);
-        }
+        money += levelMoney;
+        UserInterfaceManager.instance.LevelCompleted();
     }
-    public void DisplayCircleInsides()
+    public void LevelFailed()
     {
-        circleInsides[0].SetActive(true);
+        money += levelMoney;
+        UserInterfaceManager.instance.LevelFailed();
+    }
+
+    public void IncreaseMoney()
+    {
+        levelMoney++;
     }
 }

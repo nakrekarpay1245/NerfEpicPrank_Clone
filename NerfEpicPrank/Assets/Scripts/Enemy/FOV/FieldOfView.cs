@@ -35,16 +35,6 @@ public class FieldOfView : MonoBehaviour
 
     public MeshFilter viewMeshFilter;
     Mesh viewMesh;
-
-    //public static FieldOfView instance;
-
-    //private void Awake()
-    //{
-    //    if (instance == null)
-    //    {
-    //        instance = this;
-    //    }
-    //}
     void Start()
     {
         LevelManager.instance.IncreaseEnemyCount();

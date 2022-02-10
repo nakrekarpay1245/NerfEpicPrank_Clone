@@ -7,8 +7,8 @@ public class StateMachine : MonoBehaviour
 {
     private IState currentState;
 
-    [SerializeField]
-    private Text stateText;
+    //[SerializeField]
+    //private Text stateText;
     public void ChangeStates(IState iState)
     {
         if (currentState != null)
@@ -22,7 +22,7 @@ public class StateMachine : MonoBehaviour
 
     public void UpdateStates()
     {
-        stateText.text = currentState.ToString();
+        //stateText.text = currentState.ToString();
         currentState.OnStateUpdate();
     }
 

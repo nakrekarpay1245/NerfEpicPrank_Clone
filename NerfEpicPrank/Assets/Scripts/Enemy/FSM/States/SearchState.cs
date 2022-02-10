@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SearchState : IState
 {
@@ -13,6 +14,7 @@ public class SearchState : IState
     public float speed;
 
     public GameObject alarmDisplay;
+    public Image alarmImage;
 
     public float suspicionAlarmTimer;
 
@@ -21,8 +23,8 @@ public class SearchState : IState
     public EnemyAI enemyAI;
 
     public SearchState(Action<int> Callback, AudioSource audioSource, Animator animator,
-        AudioClip audioClip, float speed, GameObject alarmDisplay, FieldOfView fieldOfView, 
-        EnemyHealth enemyHealth, EnemyAI enemyAI)
+        AudioClip audioClip, float speed, GameObject alarmDisplay, Image alarmImage,
+        FieldOfView fieldOfView, EnemyHealth enemyHealth, EnemyAI enemyAI)
     {
         this.Callback = Callback;
         this.audioSource = audioSource;
@@ -30,6 +32,7 @@ public class SearchState : IState
         this.audioClip = audioClip;
         this.speed = speed;
         this.alarmDisplay = alarmDisplay;
+        this.alarmImage = alarmImage;
         this.fieldOfView = fieldOfView;
         this.enemyHealth = enemyHealth;
         this.enemyAI = enemyAI;
@@ -37,9 +40,13 @@ public class SearchState : IState
     public void OnStateEnter()
     {
         Debug.Log("Search Enter");
-        animator.SetBool("isIdle", true);
+        animator.SetBool("isSuspicion", true);
+        animator.SetBool("isIdle", false);
+        animator.SetBool("isRun", false);
+
         audioSource.clip = audioClip;
         alarmDisplay.SetActive(false);
+        alarmImage.fillAmount = 0;
     }
 
     public void OnStateExit()

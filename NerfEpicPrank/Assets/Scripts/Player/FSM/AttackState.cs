@@ -33,7 +33,6 @@ public class AttackState : IState
     public void OnStateEnter()
     {
         Debug.Log("Attack Enter");
-
         animator.SetTrigger("isAttack");
         audioSource.clip = audioClip;
     }
@@ -55,6 +54,7 @@ public class AttackState : IState
         LookToRotation();
         Debug.Log("Attack Update");
         weapon.Fire();
+        animator.SetTrigger("isAttack");
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             Callback(0);

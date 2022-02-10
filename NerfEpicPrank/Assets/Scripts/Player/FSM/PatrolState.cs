@@ -29,6 +29,7 @@ public class PatrolState : IState
         Debug.Log("Patrol Enter");
 
         animator.SetBool("isRun", true);
+        animator.SetBool("isIdle", false);
         audioSource.clip = audioClip;
         patrolPoint = PlayerController.instance.patrolPoints[LevelManager.instance.patrolIndex];
     }

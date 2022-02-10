@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float nextTimeToFire;
 
     [SerializeField] private float bulletForce;
+    [SerializeField] private float deviation;
 
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform muzzle;
@@ -35,7 +36,7 @@ public class Weapon : MonoBehaviour
             Quaternion.EulerAngles(-90, 0, 0));
 
         currentBullet.GetComponent<Rigidbody>().AddForce(bulletForce *
-            transform.forward * Time.deltaTime * 100);
+            (transform.forward + (new Vector3(2,0.25f,0) * Random.Range(-deviation,deviation))) * Time.deltaTime * 100);
 
         if (!audioSource.isPlaying)
         {

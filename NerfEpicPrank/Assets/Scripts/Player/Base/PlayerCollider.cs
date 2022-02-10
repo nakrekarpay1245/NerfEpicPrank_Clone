@@ -10,6 +10,9 @@ public class PlayerCollider : MonoBehaviour
         {
             PlayerController.instance.Run();
             other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            other.gameObject.GetComponentInChildren<TrailRenderer>().enabled = false;
+            other.gameObject.layer = 12;
+            Debug.Log("Player Hitted");
         }
     }
     private void OnTriggerStay(Collider other)

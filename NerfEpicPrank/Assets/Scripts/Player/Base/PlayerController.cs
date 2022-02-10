@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         audioSource = playerModel.GetComponent<AudioSource>();
-        animator = playerModel.GetComponent<Animator>();
+        animator = playerModel.GetComponentInChildren<Animator>();
         StateGenerator();
         Hide();
     }

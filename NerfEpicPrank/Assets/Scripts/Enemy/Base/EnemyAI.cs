@@ -11,7 +11,6 @@ public class EnemyAI : MonoBehaviour
     public StateMachine stateMachine;
 
     private ChaseState chaseState;
-    private ShootState shootState;
     private IdleState idleState;
     private SuspicionState suspicionState;
     private SearchState searchState;
@@ -46,38 +45,31 @@ public class EnemyAI : MonoBehaviour
     public float searchAlarmTime;
 
     public GameObject alarmDisplay;
+    public Image alarmImage;
 
     public AudioClip idleClip;
     public AudioClip runClip;
     public AudioClip searchClip;
     public AudioClip suspicionClip;
+
+    public GameObject localCanvas;
     #endregion
-
-
-    //public static EnemyAI instance;
-
-    //private void Awake()
-    //{
-    //    if (instance == null)
-    //    {
-    //        instance = this;
-    //    }
-    //}
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         fieldOfView = GetComponent<FieldOfView>();
         enemyHealth = GetComponent<EnemyHealth>();
         target = fieldOfView.target.transform;
+        alarmImage.fillAmount = 0;
         StateGenerator();
         Idle();
-        //gameObject.SetActive(false);
     }
     private void Update()
     {
         stateMachine.UpdateStates();
+        localCanvas.transform.rotation = Camera.main.transform.rotation;
     }
 
     private void FixedUpdate()
@@ -90,12 +82,6 @@ public class EnemyAI : MonoBehaviour
     {
         stateMachine.ChangeStates(chaseState);
     }
-
-    public void Shoot()
-    {
-        stateMachine.ChangeStates(shootState);
-    }
-
     public void Idle()
     {
         stateMachine.ChangeStates(idleState);
@@ -118,10 +104,6 @@ public class EnemyAI : MonoBehaviour
         {
             Idle();
         }
-        else if (index == 1)
-        {
-            Shoot();
-        }
         else if (index == 2)
         {
             Suspicion();
@@ -133,40 +115,12 @@ public class EnemyAI : MonoBehaviour
         else
         {
             Chase();
-        }
-    }
-
-    private void ShootCallback(int index)
-    {
-        if (index == 0)
-        {
-            Idle();
-        }
-        else if (index == 2)
-        {
-            Suspicion();
-        }
-        else if (index == 3)
-        {
-            Chase();
-        }
-        else if (index == 4)
-        {
-            Search();
-        }
-        else
-        {
-            Shoot();
         }
     }
 
     private void IdleCallback(int index)
     {
-        if (index == 1)
-        {
-            Shoot();
-        }
-        else if (index == 2)
+        if (index == 2)
         {
             Suspicion();
         }
@@ -190,10 +144,6 @@ public class EnemyAI : MonoBehaviour
         {
             Idle();
         }
-        else if (index == 1)
-        {
-            Shoot();
-        }
         else if (index == 3)
         {
             Chase();
@@ -212,10 +162,6 @@ public class EnemyAI : MonoBehaviour
         if (index == 0)
         {
             Idle();
-        }
-        else if (index == 1)
-        {
-            Shoot();
         }
         else if (index == 2)
         {
@@ -238,7 +184,6 @@ public class EnemyAI : MonoBehaviour
     private void StateGenerator()
     {
         NewChase();
-        NewShoot();
         NewIdle();
         NewSuspicion();
         NewSearch();
@@ -250,11 +195,6 @@ public class EnemyAI : MonoBehaviour
             fieldOfView, enemyHealth, this);
         return chaseState;
     }
-    private ShootState NewShoot()
-    {
-        shootState = new ShootState(ShootCallback, fieldOfView, enemyHealth, this);
-        return shootState;
-    }
     private IdleState NewIdle()
     {
         idleState = new IdleState(IdleCallback, audioSource, animator, idleClip, alarmDisplay,
@@ -264,13 +204,15 @@ public class EnemyAI : MonoBehaviour
     private SuspicionState NewSuspicion()
     {
         suspicionState = new SuspicionState(SuspicionCallback, audioSource, animator,
-            searchClip, rotateSpeed, alarmDisplay, fieldOfView, enemyHealth, this);
+            suspicionClip, rotateSpeed, alarmDisplay, alarmImage, fieldOfView, enemyHealth,
+            this);
         return suspicionState;
     }
     private SearchState NewSearch()
     {
         searchState = new SearchState(SearchCallback, audioSource, animator,
-            searchClip, rotateSpeed, alarmDisplay, fieldOfView, enemyHealth, this);
+            searchClip, rotateSpeed, alarmDisplay, alarmImage, fieldOfView, enemyHealth,
+            this);
         return searchState;
     }
     #endregion
