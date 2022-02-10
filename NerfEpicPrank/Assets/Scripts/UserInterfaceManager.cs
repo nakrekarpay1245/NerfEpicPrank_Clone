@@ -5,20 +5,30 @@ using System.Collections.Generic;
 
 public class UserInterfaceManager : MonoBehaviour
 {
-    //public GameObject levelCompletedPanel;
-
+    [Tooltip("Yeniden Başlat")]
     public GameObject retryButton;
 
+    [Tooltip("Sonraki Bçlüm")]
     public GameObject nextButton;
 
+    [Tooltip("Mevcut Bölüm Numarası")]
     public int levelNumber;
 
+    [HideInInspector]
     public int enemyCount;
 
+    [Tooltip("Mevcut Bölüm Numarası Metni")]
     public Text levelText;
+
+    [Tooltip("para metni")]
     public Text moneyText;
+
+    [Tooltip("Oynanış gösterme objesi")]
     public GameObject tutorial;
+
+    [Tooltip("Düşman göstergesi")]
     public GameObject enemyDisplay;
+
     public GameObject circlePrefab;
     public GameObject circleInsidePrefab;
     public List<GameObject> circles;

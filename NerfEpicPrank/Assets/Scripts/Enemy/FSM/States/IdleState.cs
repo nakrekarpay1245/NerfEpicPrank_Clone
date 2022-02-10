@@ -33,7 +33,7 @@ public class IdleState : IState
     }
     public void OnStateEnter()
     {
-        Debug.Log("Idle Enter");
+        //   Debug.Log("Idle Enter");
 
         animator.SetBool("isSuspicion", false);
         animator.SetBool("isIdle", true);
@@ -47,19 +47,19 @@ public class IdleState : IState
 
     public void OnStateExit()
     {
-        Debug.Log("Idle Exit");
+        //  Debug.Log("Idle Exit");
     }
 
     public void OnStateFixedUpdate()
     {
-        Debug.Log("Idle FixedUpdate");
+        //  Debug.Log("Idle FixedUpdate");
     }
 
     public void OnStateUpdate()
     {
         suspicionAlarmTimer = Mathf.Clamp(suspicionAlarmTimer, 0, Mathf.Infinity);
 
-        Debug.Log("Idle Update");
+        //   Debug.Log("Idle Update");
 
         if (fieldOfView.targetIsDetected)
         {
@@ -80,7 +80,7 @@ public class IdleState : IState
 
         if (enemyHealth.impact)
         {
-            Debug.Log("Idle to Search");
+            // Debug.Log("Idle to Search");
             Callback(4);
         }
     }
@@ -92,7 +92,7 @@ public class IdleState : IState
         suspicionAlarmTimer += Time.deltaTime;
         if (suspicionAlarmTimer >= enemyAI.suspicionAlarmTime)
         {
-            Debug.Log("Idle to Suspicion");
+            // Debug.Log("Idle to Suspicion");
             return true;
         }
         else

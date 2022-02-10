@@ -25,7 +25,7 @@ public class HideState : IState
     }
     public void OnStateEnter()
     {
-        Debug.Log("Hide Enter");
+        //Debug.Log("Hide Enter");
         animator.SetBool("isIdle", true);
         animator.SetBool("isRun", false);
         audioSource.clip = audioClip;
@@ -33,19 +33,19 @@ public class HideState : IState
 
     public void OnStateExit()
     {
-        Debug.Log("Hide Exit");
+        //Debug.Log("Hide Exit");
     }
 
     public void OnStateFixedUpdate()
     {
-        Debug.Log("Hide FixedUpdate");
+       // Debug.Log("Hide FixedUpdate");
     }
 
     public void OnStateUpdate()
     {
         RunToPosition();
 
-        Debug.Log("Hide Update");
+       // Debug.Log("Hide Update");
         if (Input.GetKey(KeyCode.Mouse0))
         {
             Callback(1);

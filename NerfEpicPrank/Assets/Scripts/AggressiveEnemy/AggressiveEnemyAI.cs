@@ -36,15 +36,21 @@ public class AggressiveEnemyAI : MonoBehaviour
     [Tooltip("Suspicion' a geçerken alarm süresi")]
     public float suspicionAlarmTime;
 
+    [Tooltip("Alarm ibaresi")]
     public GameObject alarmDisplay;
 
+    [Tooltip("Durma anında çalınacak ses")]
     public AudioClip idleClip;
+
+    [Tooltip("Şüphe anında çalınacak ses")]
     public AudioClip suspicionClip;
 
+    [Tooltip("Silah")]
     public Weapon weapon;
     #endregion
-    public GameObject localCanvas;
 
+    [Tooltip("Can ve uyarı göstergeleri için yerel Canvas")]
+    public GameObject localCanvas;
 
     private void Start()
     {

@@ -5,15 +5,21 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
+    [Header("Düşman Sayısı")]
     public int enemyCount;
 
     public static LevelManager instance;
 
+    [Header("Kaakter Patrol Noktası Indexi")]
     public int patrolIndex;
 
+    [Header("Oyun başladı mı ? ")]
     public bool isGameStart;
 
+    [Header("Toplam para")]
     public float money;
+
+    [Header("O bölümde kazanılan para")]
     public float levelMoney;
     private void Awake()
     {
@@ -51,13 +57,13 @@ public class LevelManager : MonoBehaviour
         patrolIndex++;
         if (enemyCount <= 0)
         {
-            Debug.Log("Level Completed");
+            //Debug.Log("Level Completed");
             LevelCompleted();
         }
         else
         {
             PlayerController.instance.Patrol();
-            Debug.Log("Change Patrol Point");
+            // Debug.Log("Change Patrol Point");
         }
         UserInterfaceManager.instance.DisplayCircleInsides();
     }

@@ -40,7 +40,7 @@ public class SuspicionState : IState
 
     public void OnStateEnter()
     {
-        Debug.Log("Suspicion Enter");
+        //Debug.Log("Suspicion Enter");
         animator.SetBool("isSuspicion", true);
         animator.SetBool("isIdle", false);
         animator.SetBool("isRun", false);
@@ -53,17 +53,17 @@ public class SuspicionState : IState
 
     public void OnStateExit()
     {
-        Debug.Log("Suspicion Exit");
+        //Debug.Log("Suspicion Exit");
     }
 
     public void OnStateFixedUpdate()
     {
-        Debug.Log("Suspicion FixedUpdate");
+        //Debug.Log("Suspicion FixedUpdate");
     }
 
     public void OnStateUpdate()
     {
-        Debug.Log("Suspicion Update");
+        // Debug.Log("Suspicion Update");
 
         chaseAlarmTimer = Mathf.Clamp(chaseAlarmTimer, 0, Mathf.Infinity);
         alarmImage.fillAmount = chaseAlarmTimer / enemyAI.chaseAlarmTime;
@@ -80,12 +80,10 @@ public class SuspicionState : IState
                 //sus to sear
                 if (SuspicionToSearchAlarmControl())
                 {
-                    //Debug.Log("not search");
                     Callback(4);
                 }
                 else
                 {
-                    //Debug.Log("Else");
                     LookToTarget();
                 }
             }
@@ -126,12 +124,12 @@ public class SuspicionState : IState
 
     private bool SuspicionToChaseAlarmControl()
     {
-        Debug.Log("Suspicion to Chase Control : " + chaseAlarmTimer);
+        //Debug.Log("Suspicion to Chase Control : " + chaseAlarmTimer);
 
         chaseAlarmTimer += Time.deltaTime;
         if (chaseAlarmTimer >= enemyAI.chaseAlarmTime)
         {
-            Debug.Log("Suspicion to Chase");
+            //  Debug.Log("Suspicion to Chase");
             return true;
         }
         else
@@ -145,7 +143,7 @@ public class SuspicionState : IState
         searchAlarmTimer += Time.deltaTime;
         if (searchAlarmTimer >= enemyAI.searchAlarmTime)
         {
-            Debug.Log("Suspicion to Search");
+            //Debug.Log("Suspicion to Search");
             return true;
         }
         else

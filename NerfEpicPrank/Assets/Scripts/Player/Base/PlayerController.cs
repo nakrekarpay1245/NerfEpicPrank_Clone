@@ -14,10 +14,13 @@ public class PlayerController : MonoBehaviour
     private RunState runState;
     private PatrolState patrolState;
 
+    [Tooltip("Gizlenme pozisyonu")]
     public Vector3 hidePosition;
 
+    [Tooltip("Saldırı pozisyonu")]
     public Vector3 attackPosition;
 
+    [Tooltip("Kaçış noktası")]
     public Transform exitTransform;
     #endregion
 
@@ -39,20 +42,25 @@ public class PlayerController : MonoBehaviour
     [Header("Hareket Hızı")]
     public float rotationSpeed;
 
+    [Tooltip("Karakter modeli")]
     public GameObject playerModel;
 
+    [Tooltip("Saldırı anında çalınacak ses")]
     public AudioClip attackClip;
+
+    [Tooltip("Saklanma anında çalınacak ses")]
     public AudioClip hideClip;
+
+    [Tooltip("Koşma anında çalınacak ses")]
     public AudioClip runClip;
     #endregion
-
+    [Tooltip("Gizlenme noktaları karakter yebi düşmanı görmek için bu noktalara gider")]
     public List<Transform> patrolPoints;
 
     public static PlayerController instance;
 
+    [Tooltip("O an saldırılacak düşman")]
     public GameObject currentEnemy;
-
-   // public Quaternion startRotation;
 
     private void Awake()
     {

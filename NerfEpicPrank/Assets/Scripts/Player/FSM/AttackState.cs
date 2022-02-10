@@ -32,27 +32,27 @@ public class AttackState : IState
     }
     public void OnStateEnter()
     {
-        Debug.Log("Attack Enter");
+        //Debug.Log("Attack Enter");
         animator.SetTrigger("isAttack");
         audioSource.clip = audioClip;
     }
 
     public void OnStateExit()
     {
-        Debug.Log("Attack Exit");
+        //  Debug.Log("Attack Exit");
         playerModel.transform.localPosition = Vector3.zero;
     }
 
     public void OnStateFixedUpdate()
     {
-        Debug.Log("Attack FixedUpdate");
+        // Debug.Log("Attack FixedUpdate");
     }
 
     public void OnStateUpdate()
     {
         RunToPosition();
         LookToRotation();
-        Debug.Log("Attack Update");
+        // Debug.Log("Attack Update");
         weapon.Fire();
         animator.SetTrigger("isAttack");
         if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -69,7 +69,7 @@ public class AttackState : IState
 
     public void LookToRotation()
     {
-        Debug.Log("Look To Enemy in Attack");
+        // Debug.Log("Look To Enemy in Attack");
         Quaternion rotationTarget =
             Quaternion.LookRotation(PlayerController.instance.transform.position -
             PlayerController.instance.currentEnemy.transform.position);

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyCollider : MonoBehaviour
 {
+    [HideInInspector]
     public EnemyHealth enemyHealth;
     private void Awake()
     {

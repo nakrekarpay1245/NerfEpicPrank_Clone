@@ -23,8 +23,13 @@ public class FieldOfView : MonoBehaviour
     [Tooltip("Düşmanın Pozisyonu")]
     public Vector3 targetPosition;
 
+    [Tooltip("Düşman menzil içerisinde")]
     public bool targetInViewRadius;
+
+    [Tooltip("Düşman görüş açısı içerisinde")]
     public bool targetInFieldOfView;
+
+    [Tooltip("Düşman tespit edildi")]
     public bool targetIsDetected;
 
     public float meshResolution = 3;

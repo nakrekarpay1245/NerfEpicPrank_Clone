@@ -38,7 +38,7 @@ public class aSuspicionState : IState
 
     public void OnStateEnter()
     {
-        Debug.Log("Suspicion Enter");
+        //Debug.Log("Suspicion Enter");
         animator.SetBool("isSuspicion", true);
         animator.SetBool("isIdle", false);
         audioSource.clip = audioClip;
@@ -48,18 +48,18 @@ public class aSuspicionState : IState
 
     public void OnStateExit()
     {
-        Debug.Log("Suspicion Exit");
+        //  Debug.Log("Suspicion Exit");
     }
 
     public void OnStateFixedUpdate()
     {
-        Debug.Log("Suspicion FixedUpdate");
+        // Debug.Log("Suspicion FixedUpdate");
     }
 
     public void OnStateUpdate()
     {
         shootAlarmTimer = Mathf.Clamp(shootAlarmTimer, 0, Mathf.Infinity);
-        Debug.Log("Suspicion Update");
+        // Debug.Log("Suspicion Update");
 
         if (enemyHealth.impact)
         {
@@ -73,7 +73,7 @@ public class aSuspicionState : IState
 
     private void LookToTarget()
     {
-        Debug.Log("Look To Target");
+        //  Debug.Log("Look To Target");
         Quaternion rotationTarget = Quaternion.LookRotation(fieldOfView.targetPosition -
             enemyAI.transform.position);
         enemyAI.transform.rotation = Quaternion.RotateTowards(enemyAI.transform.rotation,
@@ -82,12 +82,12 @@ public class aSuspicionState : IState
 
     private bool SuspicionToShootAlarmControl()
     {
-        Debug.Log("Suspicion to Shoot Control : " + shootAlarmTimer);
+        //Debug.Log("Suspicion to Shoot Control : " + shootAlarmTimer);
 
         shootAlarmTimer += Time.deltaTime;
         if (shootAlarmTimer >= enemyAI.shootAlarmTime)
         {
-            Debug.Log("Suspicion to Shoot");
+            // Debug.Log("Suspicion to Shoot");
             return true;
         }
         else

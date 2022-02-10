@@ -37,24 +37,24 @@ public class aShootState : IState
     }
     public void OnStateEnter()
     {
-        Debug.Log("Shoot Enter");
+        //  Debug.Log("Shoot Enter");
         isShootTime = true;
         fieldOfView.viewMeshFilter.gameObject.SetActive(true);
     }
 
     public void OnStateExit()
     {
-        Debug.Log("Shoot Exit");
+        //  Debug.Log("Shoot Exit");
     }
 
     public void OnStateFixedUpdate()
     {
-        Debug.Log("Shoot FixedUpdate");
+        // Debug.Log("Shoot FixedUpdate");
     }
 
     public void OnStateUpdate()
     {
-        Debug.Log("Shoot Update");
+        // Debug.Log("Shoot Update");
 
         ShootTime();
 
@@ -63,20 +63,20 @@ public class aShootState : IState
 
         if (isShootTime)
         {
-            Debug.Log("Shoot Time");
+            //Debug.Log("Shoot Time");
             animator.SetTrigger("isShoot");
             alarmDisplay.SetActive(true);
             weapon.Fire();
         }
         else
         {
-            Debug.Log("No Shoot Time");
+            // Debug.Log("No Shoot Time");
             alarmDisplay.SetActive(false);
         }
     }
     private void LookToTarget()
     {
-        Debug.Log("Look To Target");
+        // Debug.Log("Look To Target");
         Quaternion rotationTarget = Quaternion.LookRotation(fieldOfView.targetPosition -
             enemyAI.transform.position);
         enemyAI.transform.rotation = Quaternion.RotateTowards(enemyAI.transform.rotation,

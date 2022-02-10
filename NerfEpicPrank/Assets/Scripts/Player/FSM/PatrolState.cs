@@ -26,7 +26,7 @@ public class PatrolState : IState
     }
     public void OnStateEnter()
     {
-        Debug.Log("Patrol Enter");
+        //Debug.Log("Patrol Enter");
 
         animator.SetBool("isRun", true);
         animator.SetBool("isIdle", false);
@@ -36,19 +36,16 @@ public class PatrolState : IState
 
     public void OnStateExit()
     {
-        Debug.Log("Patrol Exit");
+       // Debug.Log("Patrol Exit");
     }
 
     public void OnStateFixedUpdate()
     {
-        Debug.Log("Patrol FixedUpdate");
+       // Debug.Log("Patrol FixedUpdate");
     }
 
     public void OnStateUpdate()
-    {
-        //Debug.Log("Patrol Point Name : " + patrolPoint.name +
-        //    Vector3.Distance(PlayerController.instance.transform.position,
-        //    patrolPoint.position));
+    {       
         GoNextPatrolPoint();
         if (Vector3.Distance(PlayerController.instance.transform.position,
             patrolPoint.position) < 0.5f)

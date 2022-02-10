@@ -30,12 +30,12 @@ public class ChaseState : IState
     }
     public void OnStateEnter()
     {
-        Debug.Log("Game Over");
+        //Debug.Log("Game Over");
 
         animator.SetBool("isSuspicion", false);
         animator.SetBool("isIdle", false);
-        animator.SetBool("isRun", true); 
-        
+        animator.SetBool("isRun", true);
+
         audioSource.clip = audioClip;
 
         PlayerController.instance.Run();
@@ -45,17 +45,17 @@ public class ChaseState : IState
 
     public void OnStateExit()
     {
-        Debug.Log("Chase Exit");
+        //  Debug.Log("Chase Exit");
     }
 
     public void OnStateFixedUpdate()
     {
-        Debug.Log("Chase FixedUpdate");
+        // Debug.Log("Chase FixedUpdate");
     }
 
     public void OnStateUpdate()
     {
-        Debug.Log("Chase Update");
+        //  Debug.Log("Chase Update");
         //look and follow the target
         LookToTarget();
         FollowTarget();
@@ -63,7 +63,7 @@ public class ChaseState : IState
 
     private void LookToTarget()
     {
-        Debug.Log("Look To Target in Chase");
+        //  Debug.Log("Look To Target in Chase");
         Quaternion rotationTarget = Quaternion.LookRotation(fieldOfView.targetPosition -
             enemyAI.transform.position);
         enemyAI.transform.rotation = Quaternion.RotateTowards(enemyAI.transform.rotation,
@@ -71,7 +71,7 @@ public class ChaseState : IState
     }
     private void FollowTarget()
     {
-        Debug.Log("Follow To Target in Chase");
+        //  Debug.Log("Follow To Target in Chase");
         Vector3 followPosition = Vector3.Lerp(enemyAI.transform.position,
             fieldOfView.targetPosition, Time.deltaTime * speed * 0.25f);
         enemyAI.transform.position = followPosition;

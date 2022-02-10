@@ -26,8 +26,8 @@ public class RunState : IState
     }
     public void OnStateEnter()
     {
-        Debug.Log("Run Enter");
-        Debug.Log("Level Failed On Player Run State");
+        //Debug.Log("Run Enter");
+        //Debug.Log("Level Failed On Player Run State");
         LevelManager.instance.LevelFailed();
 
         animator.SetBool("isRun", true);
@@ -37,23 +37,23 @@ public class RunState : IState
 
     public void OnStateExit()
     {
-        Debug.Log("Run Exit");
+        //Debug.Log("Run Exit");
     }
 
     public void OnStateFixedUpdate()
     {
-        Debug.Log("Run FixedUpdate");
+        //Debug.Log("Run FixedUpdate");
     }
 
     public void OnStateUpdate()
     {
-        Debug.Log("Run Update");
+        //Debug.Log("Run Update");
         LookToExit();
         RunToExit();
     }
     private void LookToExit()
     {
-        Debug.Log("Look To Exit");
+        //  Debug.Log("Look To Exit");
         Quaternion rotationTarget = Quaternion.LookRotation(PlayerController.instance.transform.position -
             exitTransform.position);
         PlayerController.instance.transform.rotation =

@@ -5,20 +5,26 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("Takip etme hızı")]
     private float followSpeed;
 
     [SerializeField]
+    [Tooltip("Dönme hızı")]
     private float rotationSpeed;
 
     [SerializeField]
+    [Tooltip("x ekseninde takip etme uzaklığı")]
     public float xOffset;
 
     [SerializeField]
+    [Tooltip("z ekseninde takip etme uzaklığı")]
     public float zOffset;
 
     [SerializeField]
+    [Tooltip("y ekseninde takip etme uzaklığı")]
     public float yOffset;
 
+    [Tooltip("takip edilecek obje")]
     public GameObject target;
 
     public static CameraMovement instance;

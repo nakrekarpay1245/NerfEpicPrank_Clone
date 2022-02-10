@@ -9,7 +9,7 @@ public class PlayerCollider : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyBullet"))
         {
             PlayerController.instance.Run();
-            Debug.Log("Player Hitted");
+            //Debug.Log("Player Hitted");
         }
     }
     private void OnTriggerStay(Collider other)
@@ -22,7 +22,6 @@ public class PlayerCollider : MonoBehaviour
             CameraMovement.instance.xOffset = other.gameObject.GetComponent<HideArea>().xOffset;
             CameraMovement.instance.yOffset = other.gameObject.GetComponent<HideArea>().yOffset;
             CameraMovement.instance.zOffset = other.gameObject.GetComponent<HideArea>().zOffset;
-            //other.gameObject.GetComponent<HideArea>().currentEnemy.SetActive(true);
         }
     }
 }

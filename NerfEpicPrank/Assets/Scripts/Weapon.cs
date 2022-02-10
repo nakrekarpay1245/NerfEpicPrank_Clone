@@ -4,14 +4,27 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private float fireRate;
-    [SerializeField] private float nextTimeToFire;
+    [SerializeField]
+    [Header("Silah saniyede atış sayısı")]
+    private float fireRate;
+    
+    private float nextTimeToFire;
 
-    [SerializeField] private float bulletForce;
-    [SerializeField] private float deviation;
+    [SerializeField]
+    [Header("Silah mermi fırlatma hızı")]
+    private float bulletForce;
 
-    [SerializeField] private GameObject bullet;
-    [SerializeField] private Transform muzzle;
+    [SerializeField]
+    [Header("Silah mermi sapma miktarı")]
+    private float deviation;
+
+    [SerializeField]
+    [Header("Silah mermi preafbi")]
+    private GameObject bullet;
+
+    [SerializeField]
+    [Header("Silah mermi çıkma noktası(namlu)")]
+    private Transform muzzle;
 
 
     [SerializeField] private AudioSource audioSource;

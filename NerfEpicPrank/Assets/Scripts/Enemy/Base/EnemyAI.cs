@@ -44,14 +44,25 @@ public class EnemyAI : MonoBehaviour
     [Tooltip("Search' a geçerken alarm süresi")]
     public float searchAlarmTime;
 
+    [Tooltip("Alarm ibaresi")]
     public GameObject alarmDisplay;
+
+    [Tooltip("Alarm seviyesi göstergesi")]
     public Image alarmImage;
 
+    [Tooltip("Durma anında çalınacak ses")]
     public AudioClip idleClip;
+
+    [Tooltip("Koşma anında çalınacak ses")]
     public AudioClip runClip;
+
+    [Tooltip("Etrafında dönme(bizi arama) anında çalınacak ses")]
     public AudioClip searchClip;
+
+    [Tooltip("Şüphelenme anında çalınacak ses")]
     public AudioClip suspicionClip;
 
+    [Tooltip("Can ve uyarı göstergeleri için yerel Canvas")]
     public GameObject localCanvas;
     #endregion
 
